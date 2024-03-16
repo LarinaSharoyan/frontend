@@ -6,8 +6,10 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: 'parandzem', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
           script {
-            docker.build("front")
-            docker.image("front").push("parandzem/front:latest")
+            def myimage = docker.build("front")
+            docker.withRegistry('https://hub.docker.com/', 'parandzem') {
+              myimage.push()
+            }
           }
         }
       }
