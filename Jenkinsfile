@@ -7,7 +7,7 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'parandzem', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
           script {
             docker.build("front")
-            docker.push("docker.io/parandzem/front:latest")
+            docker.image("front").push("docker.io/parandzem/front:latest")
           }
         }
       }
