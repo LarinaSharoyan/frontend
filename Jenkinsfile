@@ -6,8 +6,8 @@ pipeline {
         echo env.DOCKER_HUB_CREDENTIALS
         script {
           docker.withRegistry('https://index.docker.io/v1/', 'docker-pat') {
-            def customImage = docker.build("parandzem/front")
-            customImage.push()
+            docker.build("parandzem/front")
+            docker.image("parandzem/front").push()
           }
         }
       }
